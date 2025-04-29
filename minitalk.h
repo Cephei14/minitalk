@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdhaibi <rdhaibi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 12:46:19 by rdhaibi           #+#    #+#             */
-/*   Updated: 2025/04/29 12:48:58 by rdhaibi          ###   ########.fr       */
+/*   Created: 2025/04/29 12:46:15 by rdhaibi           #+#    #+#             */
+/*   Updated: 2025/04/29 13:02:37 by rdhaibi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-handler_zero ()
-{
+# define _POSIX_C_SOURCE 200809L
+# include <unistd.h>
+# include <signal.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <stdarg.h>
 
-}
+# include "ft_printf.h"
+# include "libft.h"
 
-handler_one ()
-{
-
-}
-
-void	main(void)
-{
-	pid_t	pid_s;
-	struct sigaction	action;
-	
-	pid_s = getpid();
-	ft_printf("Server's PID is %d", pid_s);
-	while(1)
-	{
-		
-	}
-}
+#endif
