@@ -1,4 +1,4 @@
-NAME	=	libftprintf.a
+NAME	=	ft_printf.a
 CC	=	gcc
 FLAGS	=	-Wall -Wextra -Werror
 SRC	=	ft_printf.c \
@@ -14,7 +14,7 @@ OBJ	=	$(SRC:.c=.o)
 all:	$(NAME)
 $(NAME):	$(OBJ)
 	ar -rc $(NAME) $(OBJ)
-%.o:	%.c main.h
+%.o:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	rm -f $(OBJ)
