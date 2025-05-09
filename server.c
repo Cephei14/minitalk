@@ -6,7 +6,7 @@
 /*   By: rdhaibi <rdhaibi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:46:19 by rdhaibi           #+#    #+#             */
-/*   Updated: 2025/05/09 18:36:57 by rdhaibi          ###   ########.fr       */
+/*   Updated: 2025/05/09 20:40:46 by rdhaibi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,39 +44,36 @@ void	print_binary_letter(char *text)
 			c = c + iter_power(2, 7 - i);	
 		i++;
 	}
-	ft_printf("%c", c);
+	if (c == '\0')
+		ft_printf("\n");
+	else
+		ft_printf("%c", c);
 }
 
-void	decode(int signum, siginfo_t *info, void *context)
+void	decode(int signum)
 {
 	static char	*binary_text = NULL;
 	static int	i = 0;
 
-	(void)context;
 	if (binary_text == NULL)
 	{
 		binary_text = malloc(sizeof(char) * 8);
 		if (!binary_text)
 			exit(EXIT_FAILURE);
+		ft_memset(binary_text, 0, 8);
 	}
 	if (signum == SIGUSR1)
 		binary_text[i] = '1';
 	else if (signum == SIGUSR2)
 		binary_text[i] = '0';
-	else
-	{
-		free(binary_text);
-		return;
-	}
 	i++;
 	if (i == 8)
 	{
+		i = 0;
 		print_binary_letter(binary_text);
 		free(binary_text);
 		binary_text = NULL;
-		i = 0;
 	}
-	kill(info->si_pid, SIGUSR1); // Send acknowledgment to the client
 }
 
 int	main(void)
@@ -84,8 +81,8 @@ int	main(void)
 	struct sigaction	sa;
 
 	ft_printf("Server's PID is : %d\n", getpid());
-	sa.sa_sigaction = decode;
-	sa.sa_flags = SA_SIGINFO;
+	sa.sa_handler = decode;
+	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		ft_printf("Error registering sa1's handler function\n");

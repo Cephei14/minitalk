@@ -6,7 +6,7 @@
 /*   By: rdhaibi <rdhaibi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:46:25 by rdhaibi           #+#    #+#             */
-/*   Updated: 2025/05/09 18:36:54 by rdhaibi          ###   ########.fr       */
+/*   Updated: 2025/05/09 20:38:41 by rdhaibi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,44 +31,18 @@ int	checking_args(int argc, char **argv)
 	return (1);
 }
 
-void	signal_ack(int signum)
-{
-	(void)signum;
-}
-
 void	code(int server, char c)
 {
-	int					i;
-	struct sigaction	sa;
-
-	sa.sa_handler = signal_ack;
-	sa.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
-	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-	{
-		ft_printf("Error registering acknowledgment handler\n");
-		exit(EXIT_FAILURE);
-	}
+	int	i;
+	
 	i = 7;
 	while (i >= 0)
 	{
 		if ((c >> i) & 1)
-		{
-			if (kill(server, SIGUSR1) == -1)
-			{
-				ft_printf("Error: Failed to send SIGUSR1\n");
-				exit(EXIT_FAILURE);
-			}
-		}
+			kill(server, SIGUSR1);
 		else
-		{
-			if (kill(server, SIGUSR2) == -1)
-			{
-				ft_printf("Error: Failed to send SIGUSR2\n");
-				exit(EXIT_FAILURE);
-			}
-		}
-		pause(); // Wait for acknowledgment from the server
+			kill(server, SIGUSR2);
+		usleep(500);
 		i--;
 	}
 }
