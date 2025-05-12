@@ -6,23 +6,23 @@
 /*   By: rdhaibi <rdhaibi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:46:19 by rdhaibi           #+#    #+#             */
-/*   Updated: 2025/05/09 20:40:46 by rdhaibi          ###   ########.fr       */
+/*   Updated: 2025/05/12 19:52:08 by rdhaibi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	iter_power(int	nb, int	power)
+int	iter_power(int nb, int power)
 {
 	int	i;
 	int	n;
-	
+
 	if (power < 0)
 		return (0);
 	if (power == 0)
 		return (1);
 	n = 1;
-	i = 0;	
+	i = 0;
 	while (i < power)
 	{
 		n = nb * n;
@@ -41,7 +41,7 @@ void	print_binary_letter(char *text)
 	while (i <= 7)
 	{
 		if (text[i] == '1')
-			c = c + iter_power(2, 7 - i);	
+			c = c + iter_power(2, 7 - i);
 		i++;
 	}
 	if (c == '\0')

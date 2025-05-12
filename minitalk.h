@@ -6,7 +6,7 @@
 /*   By: rdhaibi <rdhaibi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:46:15 by rdhaibi           #+#    #+#             */
-/*   Updated: 2025/05/09 18:10:28 by rdhaibi          ###   ########.fr       */
+/*   Updated: 2025/05/12 19:54:59 by rdhaibi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@
 # include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 
-int	checking_args(int argc, char **argv);
+int		checking_args(int argc, char **argv);
 void	code(int server, char c);
-int usleep(useconds_t usec);
+int		iter_power(int nb, int power);
+void	print_binary_letter(char *text);
+void	decode(int signum);
+void	code(int server, char c);
+int		checking_args(int argc, char **argv);
+int		usleep(useconds_t usec);
 
 #endif

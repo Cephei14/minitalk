@@ -6,7 +6,7 @@
 /*   By: rdhaibi <rdhaibi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:46:25 by rdhaibi           #+#    #+#             */
-/*   Updated: 2025/05/09 20:38:41 by rdhaibi          ###   ########.fr       */
+/*   Updated: 2025/05/12 19:52:54 by rdhaibi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	checking_args(int argc, char **argv)
 void	code(int server, char c)
 {
 	int	i;
-	
+
 	i = 7;
 	while (i >= 0)
 	{
@@ -42,7 +42,7 @@ void	code(int server, char c)
 			kill(server, SIGUSR1);
 		else
 			kill(server, SIGUSR2);
-		usleep(500);
+		usleep(100);
 		i--;
 	}
 }
@@ -57,12 +57,12 @@ int	main(int argc, char **argv)
 	server = ft_atoi(argv[1]);
 	if (!checking_args(argc, argv) || server <= 0)
 		return (1);
-	while(1)
+	while (1)
 	{
 		c = argv[2][i];
 		code(server, c);
 		if (c == '\0')
-			break;
+			break ;
 		i++;
 	}
 	return (0);
